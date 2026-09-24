@@ -307,6 +307,52 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
 .gwo-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
 .find{font-size:.72rem;font-weight:600;margin-left:8px;text-decoration:none;white-space:nowrap}
 .find:hover{text-decoration:underline}
+
+/* malware lab */
+.ml-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:18px;align-items:start}
+@media (max-width:860px){.ml-grid{grid-template-columns:minmax(0,1fr)}}
+.ml-drop{border:2px dashed var(--line);border-radius:14px;padding:26px 16px;text-align:center;background:var(--surface);cursor:pointer;color:var(--ink-2);transition:border-color .2s,background .2s;display:flex;flex-direction:column;gap:4px}
+.ml-drop:hover,.ml-drop.over{border-color:#c0392b;background:rgba(192,57,43,.05)}
+.ml-drop:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ml-drop b{color:var(--head-ink);font-size:1rem}
+.ml-drop span{font-size:.84rem}
+.ml-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.ml-row input{flex:1;min-width:0;padding:8px 11px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-family:var(--mono);font-size:.78rem}
+.ml-lbl{display:block;font-size:.8rem;font-weight:600;color:var(--ink-2);margin-top:14px}
+.ml-ti{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.ml-ti a{text-decoration:none;font-weight:700;font-size:.85rem;padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--head-ink)}
+.ml-ti a:hover{border-color:var(--accent)}
+.ml-ti a.ml-vt{background:#394eff;border-color:#394eff;color:#fff}
+.ml-out{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;min-height:220px;min-width:0}
+.ml-muted{color:var(--ink-3);font-size:.86rem;margin:0}
+.ml-bad{color:#c0392b;font-size:.88rem;margin:8px 0 0}
+.ml-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ml-verdict{font-weight:800;font-size:.9rem;padding:5px 14px;border-radius:20px}
+.ml-verdict.ok{background:rgba(31,138,91,.14);color:#1f8a5b}.ml-verdict.lo{background:rgba(0,167,191,.14);color:var(--accent-ink)}
+.ml-verdict.md{background:rgba(224,165,38,.18);color:#9a6b00}.ml-verdict.hi{background:rgba(192,57,43,.15);color:#c0392b}
+.ml-meter{flex:1;min-width:120px;height:10px;border-radius:5px;background:var(--line);overflow:hidden}
+.ml-meter i{display:block;height:100%;border-radius:5px}
+.ml-meter i.ok{background:#1f8a5b}.ml-meter i.lo{background:var(--accent)}.ml-meter i.md{background:#e0a526}.ml-meter i.hi{background:#c0392b}
+.ml-kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px 14px;font-size:.86rem;color:var(--ink-2);margin:8px 0}
+.ml-kv b{color:var(--ink)}
+.ml-kv span{word-break:break-all}
+.ml-bar{display:inline-block;width:80px;height:6px;border-radius:3px;background:var(--line);vertical-align:middle;overflow:hidden;margin-inline-start:6px}
+.ml-bar i{display:block;height:100%;background:var(--accent)}
+.ml-hashes{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+.ml-hashes div{display:grid;grid-template-columns:70px minmax(0,1fr);gap:8px;align-items:start;font-size:.8rem}
+.ml-hashes code{font-family:var(--mono);font-size:.74rem;word-break:break-all;color:var(--ink);background:var(--surface-2);padding:4px 6px;border-radius:5px}
+.ml-h{margin:14px 0 6px;color:var(--head-ink);font-size:.95rem}
+.ml-find{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.ml-find li{border-inline-start:4px solid var(--line);background:var(--surface-2);border-radius:0 8px 8px 0;padding:8px 12px;font-size:.85rem;color:var(--ink-2);display:flex;flex-direction:column;gap:2px;word-break:break-word}
+.ml-find li b{color:var(--ink)}
+.ml-find li.w1{border-color:var(--accent)}.ml-find li.w2{border-color:#e0a526}.ml-find li.w3,.ml-find li.w4{border-color:#c0392b}
+.ml-det{margin-top:10px;border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.ml-det summary{cursor:pointer;font-weight:700;color:var(--head-ink);font-size:.88rem}
+.ml-tab{width:100%;border-collapse:collapse;font-size:.8rem;margin-top:6px}
+.ml-tab th,.ml-tab td{text-align:start;padding:5px 6px;border-bottom:1px solid var(--line);color:var(--ink-2)}
+.ml-tab th{color:var(--ink);font-weight:700}
+.ml-ioc{margin:8px 0;padding-inline-start:18px}
+.ml-ioc code{font-family:var(--mono);font-size:.76rem;word-break:break-all}
 .hash{font-family:var(--mono);font-size:.78rem;word-break:break-all;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 11px;margin-top:10px;color:var(--ink);min-height:40px}
 .seg.small button{padding:4px 10px;font-size:.74rem}
 .tool .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
@@ -370,7 +416,7 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
         <a href="https://www.scopus.com/authid/detail.uri?authorId=55361166900" target="_blank" rel="noopener">Scopus</a>
         <a href="https://dblp.org/pid/117/7970.html" target="_blank" rel="noopener">dblp</a>
         <a href="https://www.researchgate.net/profile/Moutaz-Alazab" target="_blank" rel="noopener">ResearchGate</a>
-        <a href="#contact">Contact</a>
+        <a href="#get-in-touch">Contact</a>
       </div>
     </div>
     <div class="hero-figs" aria-label="Research impact">
@@ -605,10 +651,11 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
           <h3>Expert witness</h3>
           <p class="lede" style="font-size:.95rem">Certified Cybersecurity Expert Witness registered with the Ministry of Justice, State of Qatar <span class="mono">(Reg. No. 346)</span>. I provide independent technical analysis and expert opinion in matters involving digital evidence, cybercrime, malware and network intrusions.</p>
           <div class="chips"><span class="chip">Digital evidence analysis</span><span class="chip">Malware attribution</span><span class="chip">Incident reconstruction</span><span class="chip">Chain of custody</span></div>
-          <p style="margin-top:14px"><a href="expert-witness.html#ew-assess"><b>Assess your case online, with the first-24-hours checklist and evidence verifier →</b></a><br><a href="ar-expert-witness.html" lang="ar"><b>صفحة الخبرة الفنية بالعربية ←</b></a></p>
+          <p style="margin-top:14px"><a href="expert-witness.html#qatar-law"><b>NCSA alignment and Qatar's cybersecurity laws at a glance →</b></a><br><a href="expert-witness.html#ew-assess"><b>Assess your case online, with the first-24-hours checklist and evidence verifier →</b></a><br><a href="ar-expert-witness.html" lang="ar"><b>صفحة الخبرة الفنية بالعربية ←</b></a></p>
         </div>
         <div>
           <h3>CyberSecConSol · training and advisory</h3>
+          <p style="margin:0 0 8px"><span class="chip" style="background:rgba(138,21,56,.1);border-color:rgba(138,21,56,.35)">Aligned with Qatar's NCSA national framework and Cyber Security Strategy 2024–2030</span></p>
           <ul class="list">
             <li>Director of CyberSecConSol, Melbourne, delivering cybersecurity training and consulting in Australia, Qatar and Jordan</li>
             <li>Instructor on the Cyber Professional: Department Managers Program for Teknowledge's Digital Center of Excellence, in collaboration with Qatar's National Cyber Security Agency (2026)</li>
@@ -617,6 +664,12 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
           </ul>
         </div>
       </div>
+    </section>
+
+    <section class="panel" id="fx">
+      <h2>Inside a Digital Forensics Investigation</h2>
+      <p class="lede">How digital evidence travels from a seized phone or laptop to a courtroom, in six stages. Select a stage or let it play.</p>
+      <div id="fx-story"></div>
     </section>
 
     <section class="panel" id="honours">
@@ -669,9 +722,15 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
       </ul>
     </section>
 
+    <section class="panel" id="get-in-touch">
+      <h2>Get in Touch</h2>
+      <p class="lede">For expert witness work, incident response, training, consulting or research collaboration, send a short message and I will get back to you. For urgent matters, use WhatsApp on +974 5206 1433.</p>
+      <div data-contact-form="en"></div>
+    </section>
+
     <section class="panel" id="lab">
       <h2>Security Lab</h2>
-      <p class="lede">Small tools I use when teaching. Everything runs in your browser, and nothing you type leaves the page.</p>
+      <p class="lede">Small tools I use when teaching, including a malware analysis lab linked to VirusTotal. Everything runs in your browser, and nothing you type or drop leaves the page.</p>
       <div class="lab">
         <div class="tool">
           <h3>Password strength estimator</h3>
@@ -716,6 +775,11 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
           <div id="quiz"></div>
         </div>
       </div>
+      <div class="tool" style="margin-top:18px" id="malware-lab">
+        <h3>Malware Analysis Lab</h3>
+        <p>Is that attachment safe? Drop a file to run the first checks a malware analyst would make, then look it up on VirusTotal. Everything is analysed in your browser, and only the file's fingerprint is shared, and only if you click a lookup link.</p>
+        <div id="mlab"></div>
+      </div>
       <div class="tool" style="margin-top:18px">
         <h3>Watch a Grey Wolf Optimizer hunt</h3>
         <p>The Grey Wolf Optimizer mimics how a pack hunts: the three best wolves (alpha, beta, delta) guide the rest towards the prey. I use it to select features for IoT botnet and intrusion detection. Here the pack searches a landscape with many false peaks for its lowest point.</p>
@@ -748,6 +812,7 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
       <div class="contact-row"><code id="email">m.alazab@bau.edu.jo</code><button class="copy" type="button" data-copy="email">Copy</button></div>
       <div class="contact-row"><code id="phone">+974 5206 1433</code><button class="copy" type="button" data-copy="phone">Copy</button></div>
       <div class="contact-row"><span>Doha, Qatar</span><span style="color:var(--ink-3);font-size:.82rem">UTC+3</span></div>
+      <a href="#get-in-touch" style="display:block;text-align:center;margin-top:12px;background:var(--navy-2);color:#fff;text-decoration:none;font-weight:700;padding:10px;border-radius:9px">Send a message</a>
     </div>
     <div class="card">
       <h3>Latest insights</h3>
@@ -782,7 +847,7 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
 <footer>
   <div class="wrap">
     <b>Dr. Moutaz Alazab</b>
-    <nav aria-label="Footer"><a href="#about">About</a><a href="#statement">Research</a><a href="#experience">Experience</a><a href="#grants">Grants</a><a href="#publications">Publications</a><a href="#service">Service</a><a href="#consulting">Consulting</a><a href="expert-witness.html">Expert Witness</a><a href="insights.html">Insights</a><a href="#honours">Honours</a><a href="#teaching">Teaching</a><a href="#lab">Lab</a><a href="infographic-cv.html">Infographic CV</a><a href="#contact">Contact</a></nav>
+    <nav aria-label="Footer"><a href="#about">About</a><a href="#statement">Research</a><a href="#experience">Experience</a><a href="#grants">Grants</a><a href="#publications">Publications</a><a href="#service">Service</a><a href="#consulting">Consulting</a><a href="expert-witness.html">Expert Witness</a><a href="insights.html">Insights</a><a href="#honours">Honours</a><a href="#teaching">Teaching</a><a href="#lab">Lab</a><a href="infographic-cv.html">Infographic CV</a><a href="#get-in-touch">Contact</a></nav>
     <small>© 2026 Moutaz Alazab</small>
   </div>
 </footer>
@@ -797,6 +862,9 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
 <button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
 
 <script src="stats.js"></script>
+<script src="malware-lab.js"></script>
+<script src="contact-form.js"></script>
+<script src="forensics-visuals.js"></script>
 <script>
 // kind: J journal, C conference, B book chapter
 const PUBS = [
@@ -1191,7 +1259,7 @@ let tt; function toast(msg){ const t=document.getElementById('toast'); t.textCon
 (function(){
   const pal=document.getElementById('palette'), inp=document.getElementById('palIn'), list=document.getElementById('palList'); let items=[], sel=0;
   const sections=[...document.querySelectorAll('section.panel, #contact')].map(s=>({label:(s.querySelector('h2,h3')||{}).textContent, hint:'Section', go:()=>s.scrollIntoView({behavior:reduce()?'auto':'smooth'})}));
-  const extra=[{label:'Expert witness services',hint:'Page',go:()=>{location.href='expert-witness.html';}},{label:'Insights and articles',hint:'Page',go:()=>{location.href='insights.html';}},{label:'Arabic page · النسخة العربية',hint:'Page',go:()=>{location.href='ar.html';}},{label:'Open the Infographic CV',hint:'Page',go:()=>{location.href='infographic-cv.html';}},{label:'Switch colour theme',hint:'Action',go:()=>document.getElementById('themeBtn').click()},{label:'Open Google Scholar',hint:'Link',href:'https://scholar.google.com/citations?user=5Cj5xnQAAAAJ&hl=en'}];
+  const extra=[{label:'Send a message (contact form)',hint:'Section',go:()=>document.getElementById('get-in-touch').scrollIntoView({behavior:reduce()?'auto':'smooth'})},{label:'Expert witness services',hint:'Page',go:()=>{location.href='expert-witness.html';}},{label:'Insights and articles',hint:'Page',go:()=>{location.href='insights.html';}},{label:'Arabic page · النسخة العربية',hint:'Page',go:()=>{location.href='ar.html';}},{label:'Open the Infographic CV',hint:'Page',go:()=>{location.href='infographic-cv.html';}},{label:'Switch colour theme',hint:'Action',go:()=>document.getElementById('themeBtn').click()},{label:'Open Google Scholar',hint:'Link',href:'https://scholar.google.com/citations?user=5Cj5xnQAAAAJ&hl=en'}];
   function build(){ const t=inp.value.trim().toLowerCase();
     const pubs=t.length>1?PUBS.filter(p=>(p[3]+' '+p[4]+' '+p[2]).toLowerCase().includes(t)).slice(0,8).map(p=>({label:p[3],hint:String(p[0]),go:()=>{ F.term=t; q.value=inp.value; render(); goPubs(); }})):[];
     items=[...sections,...extra].filter(x=>!t||x.label.toLowerCase().includes(t)).concat(pubs); sel=0; paint(); }
