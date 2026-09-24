@@ -1,0 +1,265 @@
+/* Interactive toolkit for the expert-witness pages. Language comes from <html lang> or the .page[lang] wrapper. */
+(function () {
+  var PHONE = '97452061433', PHONE_TXT = '+974 5206 1433', EMAIL = 'm.alazab@bau.edu.jo';
+  var root = document.querySelector('[lang="ar"].page') || document.documentElement;
+  var AR = (root.getAttribute('lang') || document.documentElement.lang || '').indexOf('ar') === 0 || !!document.querySelector('.page[dir="rtl"]');
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var ICON = {
+    wa: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2s.2-1.1.1-1.2l-.5-.3z"/></svg>',
+    call: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>'
+  };
+
+  var T = AR ? {
+    steps: ['نوع الحادثة', 'التوقيت', 'صفتك', 'الأدلة المتوفرة'],
+    q: ['ما نوع الحادثة أو القضية؟', 'متى وقعت الحادثة أو متى اكتُشفت؟', 'بأي صفة تتواصل معنا؟', 'ما الأدلة المتوفرة لديك؟ (يمكن اختيار أكثر من خيار)'],
+    types: [['ransom', '🔒', 'برامج الفدية أو تشفير الملفات'], ['breach', '📂', 'تسريب أو اختراق بيانات'], ['bec', '✉️', 'احتيال عبر البريد الإلكتروني أو تحويل مدفوعات'], ['hack', '🛡️', 'دخول غير مصرّح به إلى الأنظمة'], ['insider', '👤', 'سرقة بيانات من موظف'], ['dispute', '📄', 'نزاع حول صحة رسائل أو مستندات'], ['mobile', '📱', 'أدلة من هاتف محمول'], ['wa', '💬', 'محادثات واتساب أو رسائل'], ['sale', '🛒', 'نزاع بيع وشراء أجهزة أو برمجيات'], ['value', '🏷️', 'تقييم سعر جهاز أو حالته'], ['other', '❓', 'أخرى']],
+    when: [['now', 'الآن أو خلال آخر 24 ساعة'], ['week', 'خلال الأسبوع الماضي'], ['month', 'خلال الشهر الماضي'], ['older', 'قبل أكثر من شهر']],
+    role: [['company', 'شركة أو مؤسسة'], ['lawyer', 'محامٍ أو مستشار قانوني'], ['court', 'جهة قضائية أو حكومية'], ['person', 'فرد']],
+    ev: [['pcs', '💻', 'أجهزة كمبيوتر أو خوادم'], ['phones', '📱', 'هواتف محمولة'], ['email', '✉️', 'رسائل بريد إلكتروني'], ['cloud', '☁️', 'حسابات سحابية'], ['logs', '🧾', 'سجلات الأنظمة والشبكة'], ['shots', '🖼️', 'لقطات شاشة فقط'], ['unsure', '🤔', 'غير متأكد']],
+    back: 'السابق', next: 'التالي', again: 'تقييم جديد', see: 'عرض التقييم',
+    pick: 'اختر إجابة للمتابعة.',
+    emptyTitle: 'تقييمك الأولي', empty: 'أجب عن أربعة أسئلة قصيرة لتحصل على تقييم أولي، وأهم الخطوات الفورية، وما تحتاج إلى تجهيزه قبل التواصل.',
+    urg: { hi: 'أولوية عالية: تصرّف الآن', md: 'أولوية متوسطة: خلال أيام', lo: 'مراجعة مخطط لها' },
+    now: 'الخطوات الفورية', prep: 'جهّز قبل التواصل', sum: 'ملخص للإرسال',
+    wa: 'أرسل عبر واتساب', copy: 'نسخ الملخص', copied: 'تم نسخ الملخص', selected: 'حدّد النص وانسخه',
+    sumHead: 'طلب استشارة خبرة فنية – أمن سيبراني', sumType: 'نوع الحادثة', sumWhen: 'التوقيت', sumRole: 'الصفة', sumEv: 'الأدلة',
+    act: {
+      ransom: ['افصل الأجهزة المصابة عن الشبكة دون إطفائها أو إعادة تثبيتها.', 'صوّر رسالة الفدية والشاشات، ولا تتفاوض أو تدفع قبل حفظ الأدلة.', 'احفظ سجلات الجدار الناري وخوادم VPN والبريد فوراً قبل حذفها التلقائي.'],
+      breach: ['حدّد الأنظمة والبيانات التي يُحتمل تأثرها دون العبث بها.', 'صدّر سجلات الوصول والتدقيق ومدّد فترة الاحتفاظ بها.', 'وثّق كيف ومتى اكتُشف التسريب ومن اطّلع عليه.'],
+      bec: ['احتفظ بالرسائل الأصلية كاملة مع الترويسات، ولا تعيد توجيهها.', 'تواصل مع البنك فوراً لمحاولة إيقاف التحويل.', 'غيّر كلمات مرور البريد المتأثر وفعّل التحقق الثنائي بعد حفظ السجلات.'],
+      hack: ['اعزل الأنظمة المتأثرة عن الشبكة مع إبقائها قيد التشغيل.', 'احفظ السجلات وقائمة الحسابات النشطة قبل أي تغيير.', 'قلّل عدد الأشخاص الذين يدخلون إلى الأنظمة ووثّق كل إجراء.'],
+      insider: ['لا تواجه الموظف قبل حفظ الأدلة.', 'احفظ أجهزته وحساباته كما هي دون تشغيلها أو تعديلها.', 'اجمع سجلات البريد والسحابة ووحدات التخزين الخارجية.'],
+      dispute: ['احتفظ بالأجهزة أو الحسابات التي تحتوي النسخ الأصلية، لا النسخ المعاد توجيهها.', 'لا تعتمد على لقطات الشاشة وحدها، فهي سهلة الطعن.', 'دوّن مصدر كل رسالة أو ملف ومن حازه ومتى.'],
+      mobile: ['لا تُعِد ضبط الهاتف أو تحدّث نظامه.', 'فعّل وضع الطيران أو ضعه في حافظة عازلة لمنع المسح عن بُعد.', 'احتفظ بالهاتف مشحوناً ودوّن رمز القفل إن كان معروفاً.'],
+      wa: ['احتفظ بالهاتف الأصلي الذي يحتوي المحادثة، ولا تحذف التطبيق أو تعيد تثبيته.', 'لا تكتفِ بلقطات الشاشة؛ صدّر المحادثة كاملة مع الوسائط إن أمكن.', 'تأكد من وجود نسخة احتياطية حديثة على Google Drive أو iCloud.'],
+      sale: ['احتفظ بالجهاز أو البرنامج محل النزاع دون إصلاح أو تعديل.', 'اجمع العقد والفواتير والمواصفات المتفق عليها والمراسلات مع البائع.', 'صوّر الجهاز والعيوب الظاهرة ودوّن الأرقام التسلسلية.'],
+      value: ['اجمع فاتورة الشراء وتاريخه والمواصفات الكاملة.', 'لا تُصلح الجهاز أو تفتحه قبل المعاينة.', 'دوّن الأعطال الظاهرة والملحقات المتوفرة وحالة الضمان.'],
+      other: ['لا تمسح الأجهزة أو تعيد تثبيتها.', 'دوّن ما حدث بالتسلسل الزمني ومن قام بكل إجراء.', 'احفظ السجلات والرسائل المتعلقة كما هي.']
+    },
+    roleTip: { company: 'أبلغ الإدارة القانونية، وقيّم التزامات الإبلاغ النظامية.', lawyer: 'فكّر في إرسال طلب حفظ الأدلة للطرف الآخر، وتنظيم الوصول إليها عبر المحامي.', court: 'يمكن ترتيب الندب الرسمي من خلال الإجراءات المعتمدة لدى وزارة العدل.', person: 'لا تحذف أي شيء من هاتفك أو حساباتك، ولا تتواصل مع المشتبه به.' },
+    prepList: ['تسلسل زمني مختصر لما حدث', 'قائمة بالأجهزة والحسابات المعنية', 'أي رسائل أو ملاحظات أو رسائل فدية', 'الإجراءات التي اتُّخذت حتى الآن ومن قام بها', 'أسماء جهات التواصل التقنية والقانونية'],
+    olderNote: 'حتى بعد مرور وقت، كثيراً ما تبقى أدلة قابلة للاسترجاع في النسخ الاحتياطية والسجلات والحسابات السحابية.',
+    ckTitle: 'قائمة أول 24 ساعة بعد حادثة سيبرانية', ckDone: 'تم إنجاز', ckOf: 'من', ckReset: 'إعادة البدء',
+    ck: [['اعزل ولا تمسح', 'افصل الأجهزة المتأثرة عن الشبكة بدلاً من إطفائها أو إعادة تثبيتها.'], ['احفظ السجلات', 'صدّر سجلات الجدار الناري وVPN والبريد والسحابة قبل حذفها التلقائي.'], ['وثّق ما تراه', 'صوّر الشاشات ورسائل الفدية، ودوّن الأوقات والإجراءات.'], ['قلّل الوصول', 'اسمح لأقل عدد ممكن من الأشخاص بالتعامل مع الأنظمة المتأثرة.'], ['لا تدفع ولا تتفاوض بعد', 'احفظ الأدلة أولاً واستشر الجهات المختصة.'], ['احتفظ بالرسائل الأصلية', 'مع الترويسات الكاملة، ولا تعِد توجيهها داخل المؤسسة.'], ['ابدأ سلسلة الحيازة', 'سجّل من استلم كل جهاز أو نسخة ومتى ولماذا.'], ['تواصل مع مستشار قانوني وخبير مستقل', 'القرارات المبكرة تؤثر في قوة القضية لاحقاً.']],
+    hTitle: 'تحقق من سلامة دليل رقمي', hDrop: 'اسحب ملفاً هنا أو اضغط للاختيار', hPriv: 'يُحسب البصمة داخل متصفحك فقط، ولا يُرفع الملف إلى أي مكان.',
+    hName: 'الملف', hSize: 'الحجم', hMod: 'آخر تعديل', hCmp: 'الصق بصمة SHA-256 مسجّلة سابقاً للمقارنة', hBtn: 'قارن', hOk: 'مطابقة: الملف لم يتغيّر منذ تسجيل البصمة.', hBad: 'غير مطابقة: الملف تغيّر أو أنه ملف مختلف.', hWork: 'جارٍ حساب البصمة…', hBig: 'الملف كبير جداً للمعالجة في المتصفح (الحد 500 ميغابايت).',
+    tabs: [
+      ['ransom', 'برامج الفدية', ['كيف دخل المهاجم وأي ثغرة استُغلت', 'نوع برنامج الفدية وسلوكه', 'البيانات التي سُحبت قبل التشفير'], ['متى بدأ الهجوم وكيف انتشر؟', 'هل سُرقت بيانات أم شُفّرت فقط؟', 'هل كانت الضوابط الأمنية معقولة؟'], ['الأجهزة المصابة كما هي', 'سجلات الجدار الناري وVPN', 'رسالة الفدية وأي تواصل مع المهاجم']],
+      ['breach', 'تسريب البيانات', ['سجلات الوصول والتدقيق', 'مسارات خروج البيانات', 'إعدادات الأنظمة المتأثرة'], ['ما البيانات التي تسرّبت ومتى؟', 'من كان يملك صلاحية الوصول؟', 'هل كان التسريب نتيجة إهمال أم هجوم؟'], ['سجلات الخوادم والسحابة', 'قوائم الصلاحيات', 'نسخ من البيانات المتسرّبة إن وُجدت']],
+      ['bec', 'الاحتيال بالبريد', ['ترويسات الرسائل ومسار إرسالها', 'النطاقات المزيّفة المشابهة', 'قواعد إعادة التوجيه في صندوق البريد'], ['هل اختُرق البريد أم زُوّر؟', 'من أرسل الرسالة فعلياً؟', 'متى بدأ المهاجم بمراقبة المراسلات؟'], ['الرسائل الأصلية كاملة', 'سجلات تسجيل الدخول للبريد', 'تفاصيل التحويل البنكي']],
+      ['insider', 'سرقة من الداخل', ['نشاط الحسابات قبل المغادرة', 'نسخ الملفات إلى وحدات خارجية أو السحابة', 'حذف البيانات أو إخفاؤها'], ['ما الملفات التي نُسخت ومتى؟', 'هل كان النسخ ضمن الصلاحيات؟', 'إلى أين نُقلت البيانات؟'], ['جهاز الموظف كما هو', 'سجلات البريد والسحابة', 'سجلات الأجهزة الخارجية']],
+      ['wa', 'محادثات واتساب', ['قاعدة بيانات المحادثات على الهاتف', 'الطوابع الزمنية والرسائل المحذوفة أو المعدّلة', 'ربط الرقم بصاحبه والجهاز المستخدم'], ['هل المحادثة أصلية وغير مفبركة؟', 'من أرسل الرسالة ومتى؟', 'هل حُذفت رسائل أو عُدّلت؟'], ['الهاتف الأصلي كما هو', 'النسخ الاحتياطية السحابية', 'هاتف الطرف الآخر إن أمكن']],
+      ['sale', 'نزاعات البيع والشراء', ['مطابقة الجهاز أو البرنامج للمواصفات المتفق عليها', 'وجود عيوب مصنعية أو سوء استخدام', 'الأرقام التسلسلية وسجل الجهاز'], ['هل الجهاز جديد أم مستعمل أو مجدّد؟', 'هل العيب موجود قبل البيع؟', 'هل البرنامج يعمل كما نُصّ في العقد؟'], ['الجهاز أو البرنامج دون تعديل', 'العقد والفواتير والمواصفات', 'المراسلات مع البائع أو المشتري']],
+      ['value', 'تقييم الأجهزة', ['الطراز والمواصفات وتاريخ الشراء', 'الحالة الفنية والأعطال', 'أسعار السوق للأجهزة المماثلة'], ['ما القيمة السوقية للجهاز وقت النزاع؟', 'كم يكلّف إصلاحه أو استبداله؟', 'هل السعر المدفوع مناسب لحالته؟'], ['الجهاز والملحقات', 'فاتورة الشراء والضمان', 'تقارير الصيانة السابقة']],
+      ['dispute', 'المستندات المتنازع عليها', ['البيانات الوصفية للملفات والرسائل', 'مصدر الرسالة والجهاز المرسل', 'آثار التعديل أو التلاعب'], ['هل الرسالة أو المستند أصلي؟', 'متى أُنشئ أو عُدّل؟', 'من الجهاز أو الحساب الذي أرسله؟'], ['الأجهزة والحسابات الأصلية', 'النسخ الإلكترونية لا المطبوعة', 'سجل حيازة كل نسخة']]
+    ],
+    tH: ['ما الذي أفحصه', 'أسئلة أجيب عنها للمحكمة', 'أدلة يجب حفظها'],
+    toastCopied: 'تم النسخ'
+  } : {
+    steps: ['Incident', 'Timing', 'Your role', 'Evidence'],
+    q: ['What kind of incident or case is it?', 'When did it happen, or when was it discovered?', 'Who are you contacting us as?', 'What evidence do you have? (choose all that apply)'],
+    types: [['ransom', '🔒', 'Ransomware or encrypted files'], ['breach', '📂', 'Data breach or leak'], ['bec', '✉️', 'Email fraud or payment diversion'], ['hack', '🛡️', 'Unauthorised access to systems'], ['insider', '👤', 'Data theft by an employee'], ['dispute', '📄', 'Disputed messages or documents'], ['mobile', '📱', 'Mobile phone evidence'], ['wa', '💬', 'WhatsApp or chat messages'], ['sale', '🛒', 'Buying/selling dispute over devices or software'], ['value', '🏷️', 'Device valuation or condition'], ['other', '❓', 'Something else']],
+    when: [['now', 'Now, or in the last 24 hours'], ['week', 'In the past week'], ['month', 'In the past month'], ['older', 'More than a month ago']],
+    role: [['company', 'A company or organisation'], ['lawyer', 'A lawyer or legal counsel'], ['court', 'A court or public authority'], ['person', 'An individual']],
+    ev: [['pcs', '💻', 'Computers or servers'], ['phones', '📱', 'Mobile phones'], ['email', '✉️', 'Emails'], ['cloud', '☁️', 'Cloud accounts'], ['logs', '🧾', 'System and network logs'], ['shots', '🖼️', 'Screenshots only'], ['unsure', '🤔', 'Not sure']],
+    back: 'Back', next: 'Next', again: 'Start a new assessment', see: 'See my assessment',
+    pick: 'Choose an answer to continue.',
+    emptyTitle: 'Your initial assessment', empty: 'Answer four short questions to get an initial assessment, the most important immediate steps, and what to prepare before you get in touch.',
+    urg: { hi: 'High priority: act now', md: 'Medium priority: within days', lo: 'Planned review' },
+    now: 'Immediate steps', prep: 'Prepare before contacting', sum: 'Summary to send',
+    wa: 'Send on WhatsApp', copy: 'Copy summary', copied: 'Summary copied', selected: 'Select the text and copy it',
+    sumHead: 'Expert consultation request – cybersecurity', sumType: 'Incident', sumWhen: 'Timing', sumRole: 'Role', sumEv: 'Evidence',
+    act: {
+      ransom: ['Disconnect affected machines from the network. Do not switch them off or reinstall them.', 'Photograph the ransom note and screens. Do not negotiate or pay before evidence is preserved.', 'Export firewall, VPN and email logs now, before they roll over.'],
+      breach: ['Identify the systems and data likely affected, without altering them.', 'Export access and audit logs and extend their retention.', 'Record how and when the leak was discovered, and who has seen it.'],
+      bec: ['Keep the original emails with full headers. Do not forward them around.', 'Contact your bank immediately to try to stop or recall the transfer.', 'After preserving logs, reset the affected mailbox password and enable two-factor sign-in.'],
+      hack: ['Isolate affected systems from the network but keep them running.', 'Preserve logs and the list of active accounts before changing anything.', 'Keep the number of people touching the systems to a minimum, and log every action.'],
+      insider: ['Do not confront the employee before evidence is preserved.', 'Secure their devices and accounts exactly as they are, without using them.', 'Collect email, cloud and USB/external-storage logs.'],
+      dispute: ['Keep the devices or accounts holding the originals, not forwarded copies.', 'Do not rely on screenshots alone; they are easy to challenge.', 'Note where each message or file came from, who held it and when.'],
+      mobile: ['Do not factory-reset or update the phone.', 'Switch on airplane mode or use a signal-blocking bag to prevent remote wiping.', 'Keep the phone charged and note the passcode if known.'],
+      wa: ['Keep the original phone that holds the chat. Do not delete or reinstall WhatsApp.', 'Do not rely on screenshots alone; export the full chat with media if you can.', 'Check that a recent Google Drive or iCloud backup exists.'],
+      sale: ['Keep the disputed device or software as it is. Do not repair or modify it.', 'Collect the contract, invoices, agreed specifications and messages with the seller.', 'Photograph the device and visible defects, and note serial numbers.'],
+      value: ['Collect the purchase invoice, date and full specifications.', 'Do not repair or open the device before inspection.', 'Note visible faults, accessories included and warranty status.'],
+      other: ['Do not wipe or reinstall any devices.', 'Write down what happened in time order and who did what.', 'Preserve related logs and messages exactly as they are.']
+    },
+    roleTip: { company: 'Inform legal counsel and assess any regulatory reporting obligations.', lawyer: 'Consider a preservation letter to the other side, and route access to evidence through counsel.', court: 'Formal appointment can be arranged through the Ministry of Justice expert procedures.', person: 'Do not delete anything from your phone or accounts, and do not contact the suspected party.' },
+    prepList: ['A short timeline of what happened', 'A list of the devices and accounts involved', 'Any messages, notes or ransom demands', 'What has been done so far, and by whom', 'Technical and legal contacts'],
+    olderNote: 'Even after time has passed, recoverable evidence often survives in backups, logs and cloud accounts.',
+    ckTitle: 'First 24 hours after a cyber incident', ckDone: 'Done', ckOf: 'of', ckReset: 'Reset',
+    ck: [['Isolate, do not wipe', 'Disconnect affected machines from the network instead of switching them off or reinstalling.'], ['Preserve logs', 'Export firewall, VPN, email and cloud logs before they roll over.'], ['Record what you see', 'Photograph screens and ransom notes; write down times and actions.'], ['Limit access', 'Let as few people as possible touch the affected systems.'], ['Do not pay or negotiate yet', 'Preserve evidence first and take specialist advice.'], ['Keep original emails', 'With full headers, and do not forward them internally.'], ['Start a chain of custody', 'Record who received each device or copy, when and why.'], ['Call legal counsel and an independent expert', 'Early decisions shape the strength of any later case.']],
+    hTitle: 'Verify the integrity of digital evidence', hDrop: 'Drop a file here, or click to choose one', hPriv: 'The fingerprint is calculated inside your browser. The file is never uploaded anywhere.',
+    hName: 'File', hSize: 'Size', hMod: 'Last modified', hCmp: 'Paste a previously recorded SHA-256 hash to compare', hBtn: 'Compare', hOk: 'Match: the file has not changed since the hash was recorded.', hBad: 'No match: the file has changed, or it is a different file.', hWork: 'Calculating fingerprint…', hBig: 'The file is too large to process in the browser (limit 500 MB).',
+    tabs: [
+      ['ransom', 'Ransomware', ['How the attacker got in and which weakness was used', 'The ransomware family and its behaviour', 'Data taken before encryption'], ['When did the attack start, and how did it spread?', 'Was data stolen, or only encrypted?', 'Were security controls reasonable?'], ['Infected machines as they are', 'Firewall and VPN logs', 'The ransom note and any contact with the attacker']],
+      ['breach', 'Data breach', ['Access and audit logs', 'How the data left the network', 'Configuration of affected systems'], ['What data leaked, and when?', 'Who had access?', 'Was it negligence or an attack?'], ['Server and cloud logs', 'Permission lists', 'Copies of the leaked data, if found']],
+      ['bec', 'Email fraud', ['Email headers and delivery path', 'Look-alike spoofed domains', 'Mailbox forwarding rules'], ['Was the mailbox hacked, or the email forged?', 'Who really sent the message?', 'How long had the attacker been watching?'], ['Original emails in full', 'Mailbox sign-in logs', 'Bank transfer details']],
+      ['insider', 'Insider theft', ['Account activity before departure', 'Copies to USB drives or personal cloud', 'Deleted or hidden data'], ['Which files were copied, and when?', 'Was the copying within their permissions?', 'Where did the data go?'], ["The employee's device as it is", 'Email and cloud logs', 'External-device logs']],
+      ['wa', 'WhatsApp chats', ['The chat database on the phone', 'Timestamps, and deleted or edited messages', 'Linking the number to its owner and device'], ['Is the chat genuine, not fabricated?', 'Who sent the message, and when?', 'Were messages deleted or edited?'], ['The original phone as it is', 'Cloud backups', "The other party's phone, if possible"]],
+      ['sale', 'Buying & selling disputes', ['Whether the device or software matches the agreed specification', 'Manufacturing defects versus misuse', 'Serial numbers and device history'], ['Is the device new, used or refurbished?', 'Did the defect exist before the sale?', 'Does the software work as the contract says?'], ['The device or software, unmodified', 'Contract, invoices and specifications', 'Messages between buyer and seller']],
+      ['value', 'Device valuation', ['Model, specification and purchase date', 'Technical condition and faults', 'Market prices of comparable devices'], ['What was the market value at the time of the dispute?', 'What would repair or replacement cost?', 'Was the price paid fair for its condition?'], ['The device and accessories', 'Purchase invoice and warranty', 'Previous repair reports']],
+      ['dispute', 'Disputed records', ['Metadata of files and messages', 'The sending device and account', 'Traces of editing or tampering'], ['Is the message or document authentic?', 'When was it created or changed?', 'Which device or account sent it?'], ['Original devices and accounts', 'Electronic copies, not printouts', 'A custody record for each copy']]
+    ],
+    tH: ['What I examine', 'Questions I answer for the court', 'Evidence to preserve'],
+    toastCopied: 'Copied'
+  };
+
+  var toastEl = document.createElement('div'); toastEl.className = 'ew-toast'; toastEl.hidden = true; toastEl.setAttribute('role', 'status'); document.body.appendChild(toastEl);
+  var tt; function toast(m) { toastEl.textContent = m; toastEl.hidden = false; clearTimeout(tt); tt = setTimeout(function () { toastEl.hidden = true; }, 2200); }
+  function copyText(text, okMsg, el) {
+    function fallback() { if (el) { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); } toast(T.selected); }
+    try { navigator.clipboard.writeText(text).then(function () { toast(okMsg); }, fallback); } catch (e) { fallback(); }
+  }
+  var waLink = function (text) { return 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(text); };
+
+  /* floating contact */
+  var fab = document.createElement('div'); fab.className = 'ew-fab';
+  fab.innerHTML = '<a class="wa" href="' + waLink(AR ? 'مرحباً د. معتز، أرغب في استشارة بخصوص قضية تتعلق بالأمن السيبراني.' : 'Hello Dr. Moutaz, I would like to discuss a cybersecurity matter.') + '" target="_blank" rel="noopener" aria-label="WhatsApp ' + PHONE_TXT + '" title="WhatsApp">' + ICON.wa + '</a>' +
+    '<a class="call" href="tel:+' + PHONE + '" aria-label="' + (AR ? 'اتصال ' : 'Call ') + PHONE_TXT + '" title="' + PHONE_TXT + '">' + ICON.call + '</a>';
+  document.body.appendChild(fab);
+
+  /* hero CTA buttons */
+  var heroCta = document.getElementById('ew-hero-cta');
+  if (heroCta) heroCta.innerHTML =
+    '<a class="ew-btn gold" href="#ew-assess">' + (AR ? 'قيّم حالتك الآن' : 'Assess your case now') + '</a>' +
+    '<a class="ew-btn wa" href="' + waLink(AR ? 'مرحباً د. معتز، أرغب في استشارة بخصوص قضية تتعلق بالأمن السيبراني.' : 'Hello Dr. Moutaz, I would like to discuss a cybersecurity matter.') + '" target="_blank" rel="noopener">' + ICON.wa + ' WhatsApp</a>' +
+    '<a class="ew-btn ghost" href="tel:+' + PHONE + '">' + ICON.call + ' <bdi dir="ltr">' + PHONE_TXT + '</bdi></a>';
+
+  /* case assessment wizard */
+  var wiz = document.getElementById('ew-assess-tool');
+  if (wiz) {
+    var st = { step: 0, type: null, when: null, role: null, ev: [] };
+    var left = document.createElement('div'), right = document.createElement('div'); right.className = 'ew-result';
+    wiz.className = 'ew-wiz'; wiz.appendChild(left); wiz.appendChild(right);
+    var lists = [T.types, T.when, T.role, T.ev], keys = ['type', 'when', 'role', 'ev'];
+    function label(list, id) { for (var i = 0; i < list.length; i++) if (list[i][0] === id) return list[i][list[i].length - 1]; return id; }
+    function drawLeft() {
+      var s = st.step, list = lists[s], multi = s === 3;
+      var h = '<div class="ew-steps" aria-hidden="true">' + T.steps.map(function (_, i) { return '<i class="' + (i <= s ? 'on' : '') + '"></i>'; }).join('') + '</div>';
+      h += '<p class="ew-q">' + (s + 1) + ' / 4 · ' + esc(T.q[s]) + '</p><div class="ew-opts" role="group" aria-label="' + esc(T.q[s]) + '">';
+      list.forEach(function (o) {
+        var on = multi ? st.ev.indexOf(o[0]) >= 0 : st[keys[s]] === o[0];
+        h += '<button type="button" class="ew-opt" data-v="' + o[0] + '" aria-pressed="' + on + '">' + (o.length === 3 ? '<span class="ic" aria-hidden="true">' + o[1] + '</span>' : '') + '<span>' + esc(o[o.length - 1]) + '</span></button>';
+      });
+      h += '</div><div class="ew-nav"><button type="button" class="ew-btn line" data-nav="back"' + (s === 0 ? ' disabled style="opacity:.4;cursor:default"' : '') + '>' + T.back + '</button>' +
+        '<button type="button" class="ew-btn dark" data-nav="next">' + (s === 3 ? T.see : T.next) + '</button></div>';
+      left.innerHTML = h;
+    }
+    function drawRight() {
+      if (!(st.type && st.when && st.role) || st.step < 4) { right.innerHTML = '<h3>' + T.emptyTitle + '</h3><p class="ew-empty">' + T.empty + '</p>'; return; }
+      var urgent = st.when === 'now' || (st.when === 'week' && /ransom|breach|bec|hack/.test(st.type));
+      var lvl = urgent ? 'hi' : (st.when === 'older' ? 'lo' : 'md');
+      var acts = T.act[st.type].slice(); acts.push(T.roleTip[st.role]);
+      if (st.ev.indexOf('shots') >= 0 && st.ev.length === 1) acts.push(T.act.dispute[1]);
+      var evTxt = st.ev.length ? st.ev.map(function (e) { return label(T.ev, e); }).join('، '.replace('، ', AR ? '، ' : ', ')) : '—';
+      var summary = T.sumHead + '\n' + T.sumType + ': ' + label(T.types, st.type) + '\n' + T.sumWhen + ': ' + label(T.when, st.when) + '\n' + T.sumRole + ': ' + label(T.role, st.role) + '\n' + T.sumEv + ': ' + evTxt;
+      var h = '<span class="ew-urg ' + lvl + '">' + T.urg[lvl] + '</span><h3>' + T.now + '</h3><ol>' + acts.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') + '</ol>';
+      if (st.when === 'older' || st.when === 'month') h += '<p class="ew-empty">' + T.olderNote + '</p>';
+      h += '<h3>' + T.prep + '</h3><ul>' + T.prepList.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') + '</ul>';
+      h += '<h3>' + T.sum + '</h3><div class="ew-summary" id="ew-sum">' + esc(summary) + '</div>';
+      h += '<div class="ew-nav" style="justify-content:flex-start"><a class="ew-btn wa" target="_blank" rel="noopener" href="' + waLink(summary) + '">' + ICON.wa + ' ' + T.wa + '</a><button type="button" class="ew-btn line" id="ew-copy-sum">' + T.copy + '</button></div>';
+      right.innerHTML = h;
+      document.getElementById('ew-copy-sum').onclick = function () { copyText(summary, T.copied, document.getElementById('ew-sum')); };
+    }
+    left.addEventListener('click', function (e) {
+      var o = e.target.closest('.ew-opt'), n = e.target.closest('[data-nav]');
+      if (o) {
+        var v = o.dataset.v;
+        if (st.step === 3) { var i = st.ev.indexOf(v); if (i >= 0) st.ev.splice(i, 1); else st.ev.push(v); drawLeft(); }
+        else { st[keys[st.step]] = v; st.step++; drawLeft(); var f = left.querySelector('.ew-opt'); if (f) f.focus(); }
+        return;
+      }
+      if (n) {
+        if (n.dataset.nav === 'back' && st.step > 0) { st.step--; drawLeft(); }
+        else if (n.dataset.nav === 'next') {
+          if (st.step < 3 && !st[keys[st.step]]) { toast(T.pick); return; }
+          if (st.step === 3) { st.step = 4; drawRight(); left.innerHTML = '<div class="ew-steps" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div><p class="ew-q">✔ ' + esc(label(T.types, st.type)) + '</p><p class="ew-empty">' + esc(label(T.when, st.when)) + ' · ' + esc(label(T.role, st.role)) + '</p><div class="ew-nav"><button type="button" class="ew-btn line" data-nav="restart">' + T.again + '</button></div>'; if (matchMedia('(max-width:820px)').matches) right.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+          st.step++; drawLeft();
+        } else if (n.dataset.nav === 'restart') { st = { step: 0, type: null, when: null, role: null, ev: [] }; drawLeft(); drawRight(); }
+      }
+    });
+    // open with a realistic example so the tool is complete at rest
+    st = { step: 4, type: 'ransom', when: 'now', role: 'company', ev: ['pcs', 'logs'] };
+    drawRight();
+    left.innerHTML = '<div class="ew-steps" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div><p class="ew-q">' + (AR ? 'مثال: ' : 'Example: ') + esc(label(T.types, 'ransom')) + '</p><p class="ew-empty">' + esc(label(T.when, 'now')) + ' · ' + esc(label(T.role, 'company')) + '</p><div class="ew-nav"><button type="button" class="ew-btn dark" data-nav="restart">' + (AR ? 'ابدأ تقييم حالتك' : 'Start your own assessment') + '</button></div>';
+  }
+
+  /* first-24h checklist */
+  var ck = document.getElementById('ew-checklist');
+  if (ck) {
+    var KEY = 'ew-ck-' + (AR ? 'ar' : 'en'), saved = [];
+    try { saved = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) {}
+    ck.innerHTML = '<div class="ew-row"><span class="ew-count" id="ew-ck-count"></span><button type="button" class="ew-btn line" id="ew-ck-reset" style="padding:6px 12px;font-size:.82rem">' + T.ckReset + '</button></div><div class="ew-prog"><i id="ew-ck-bar"></i></div><ul class="ew-check">' +
+      T.ck.map(function (c, i) { return '<li><label' + (saved[i] ? ' class="done"' : '') + '><input type="checkbox" id="ew-ck-' + i + '"' + (saved[i] ? ' checked' : '') + '><span><b>' + esc(c[0]) + '</b>' + esc(c[1]) + '</span></label></li>'; }).join('') + '</ul>';
+    function upd() {
+      var boxes = ck.querySelectorAll('input'), n = 0, st2 = [];
+      boxes.forEach(function (b) { st2.push(b.checked); if (b.checked) n++; b.closest('label').classList.toggle('done', b.checked); });
+      document.getElementById('ew-ck-count').textContent = T.ckDone + ' ' + n + ' ' + T.ckOf + ' ' + boxes.length;
+      document.getElementById('ew-ck-bar').style.width = (n / boxes.length * 100) + '%';
+      try { localStorage.setItem(KEY, JSON.stringify(st2)); } catch (e) {}
+    }
+    ck.addEventListener('change', upd);
+    document.getElementById('ew-ck-reset').onclick = function () { ck.querySelectorAll('input').forEach(function (b) { b.checked = false; }); upd(); };
+    upd();
+  }
+
+  /* evidence hash verifier */
+  var hv = document.getElementById('ew-hash');
+  if (hv) {
+    hv.innerHTML = '<div class="ew-drop" id="ew-drop" tabindex="0" role="button" aria-label="' + esc(T.hDrop) + '"><b>' + T.hDrop + '</b><span>' + T.hPriv + '</span><input type="file" id="ew-file" hidden></div>' +
+      '<div class="ew-hashout" id="ew-hashout"><div class="ew-kv"><b>' + T.hName + '</b><span id="ew-fn"></span><b>' + T.hSize + '</b><span id="ew-fs"></span><b>' + T.hMod + '</b><span id="ew-fm"></span></div>' +
+      '<div class="ew-row"><b>SHA-256</b><button type="button" class="ew-btn line" id="ew-hcopy" style="padding:5px 12px;font-size:.8rem">' + (AR ? 'نسخ' : 'Copy') + '</button></div><div class="ew-hash" id="ew-h256"></div>' +
+      '<label for="ew-cmpin" style="display:block;margin-top:12px;font-size:.88rem;color:var(--ink-2)">' + T.hCmp + '</label><div class="ew-cmp"><input id="ew-cmpin" type="text" spellcheck="false" autocomplete="off"><button type="button" class="ew-btn dark" id="ew-cmpbtn" style="padding:9px 14px">' + T.hBtn + '</button></div><div id="ew-verdict"></div></div>';
+    var drop = document.getElementById('ew-drop'), fileIn = document.getElementById('ew-file'), cur = '';
+    function fmtSize(b) { return b < 1024 ? b + ' B' : b < 1048576 ? (b / 1024).toFixed(1) + ' KB' : (b / 1048576).toFixed(2) + ' MB'; }
+    function handle(f) {
+      if (!f) return;
+      if (f.size > 500 * 1048576) { toast(T.hBig); return; }
+      document.getElementById('ew-hashout').classList.add('show');
+      document.getElementById('ew-fn').textContent = f.name; document.getElementById('ew-fs').textContent = fmtSize(f.size);
+      document.getElementById('ew-fm').textContent = new Date(f.lastModified).toLocaleString(AR ? 'ar-QA' : 'en-GB');
+      document.getElementById('ew-h256').textContent = T.hWork; document.getElementById('ew-verdict').innerHTML = '';
+      f.arrayBuffer().then(function (buf) { return crypto.subtle.digest('SHA-256', buf); }).then(function (h) {
+        cur = Array.prototype.map.call(new Uint8Array(h), function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+        document.getElementById('ew-h256').textContent = cur;
+      }).catch(function () { document.getElementById('ew-h256').textContent = 'Web Crypto unavailable'; });
+    }
+    drop.addEventListener('click', function () { fileIn.click(); });
+    drop.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileIn.click(); } });
+    fileIn.addEventListener('change', function () { handle(fileIn.files[0]); });
+    ['dragenter', 'dragover'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('over'); }); });
+    ['dragleave', 'drop'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('over'); }); });
+    drop.addEventListener('drop', function (e) { handle(e.dataTransfer.files[0]); });
+    document.getElementById('ew-hcopy').onclick = function () { if (cur) copyText(cur, T.toastCopied, document.getElementById('ew-h256')); };
+    document.getElementById('ew-cmpbtn').onclick = function () {
+      var v = document.getElementById('ew-cmpin').value.trim().toLowerCase().replace(/\s+/g, ''); if (!cur || !v) return;
+      document.getElementById('ew-verdict').innerHTML = '<div class="ew-verdict ' + (v === cur ? 'ok">✔ ' + T.hOk : 'bad">✘ ' + T.hBad) + '</div>';
+    };
+  }
+
+  /* case-type tabs */
+  var tabs = document.getElementById('ew-tabs');
+  if (tabs) {
+    tabs.innerHTML = '<div class="ew-tabs" role="tablist">' + T.tabs.map(function (t, i) { return '<button type="button" class="ew-tab" role="tab" id="ew-tab-' + t[0] + '" aria-controls="ew-tp" aria-selected="' + (i === 0) + '" tabindex="' + (i === 0 ? 0 : -1) + '" data-i="' + i + '">' + esc(t[1]) + '</button>'; }).join('') + '</div><div class="ew-panel" id="ew-tp" role="tabpanel"></div>';
+    function show(i) {
+      var t = T.tabs[i];
+      tabs.querySelectorAll('.ew-tab').forEach(function (b, k) { b.setAttribute('aria-selected', String(k === i)); b.tabIndex = k === i ? 0 : -1; });
+      document.getElementById('ew-tp').setAttribute('aria-labelledby', 'ew-tab-' + t[0]);
+      document.getElementById('ew-tp').innerHTML = [2, 3, 4].map(function (k, j) { return '<div><h4>' + T.tH[j] + '</h4><ul>' + t[k].map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>'; }).join('');
+    }
+    tabs.addEventListener('click', function (e) { var b = e.target.closest('.ew-tab'); if (b) show(+b.dataset.i); });
+    tabs.addEventListener('keydown', function (e) {
+      var b = e.target.closest('.ew-tab'); if (!b) return; var i = +b.dataset.i, n = T.tabs.length, d = 0;
+      if (e.key === 'ArrowRight') d = AR ? -1 : 1; if (e.key === 'ArrowLeft') d = AR ? 1 : -1;
+      if (d) { e.preventDefault(); var k = (i + d + n) % n; show(k); tabs.querySelectorAll('.ew-tab')[k].focus(); }
+    });
+    show(0);
+  }
+
+  /* animated credibility counters (values are correct at rest) */
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.ew-cred [data-n]').forEach(function (el) {
+      var n = (el.dataset.stat && window.SCHOLAR && window.SCHOLAR[el.dataset.stat]) || +el.dataset.n, suf = el.dataset.suf || '', t0 = performance.now();
+      (function step(t) { var k = Math.min(1, (t - t0) / 1100), v = Math.round(n * (1 - Math.pow(1 - k, 3))); el.textContent = v.toLocaleString('en-US') + suf; if (k < 1) requestAnimationFrame(step); })(t0);
+    });
+  }
+})();
