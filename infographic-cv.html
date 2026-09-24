@@ -1,0 +1,302 @@
+<title>Moutaz Alazab Infographic CV</title>
+<meta name="description" content="Infographic CV of Dr. Moutaz Alazab: career, research footprint, grants and recognition at a glance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0b1531; --navy-2:#122a63; --navy-3:#173a8a;
+  --accent:#00a7bf; --accent-ink:#007f91; --gold:#c9a227; --gold-ink:#8a6d0e; --maroon:#8a1538;
+  --bg:#eef1f8; --surface:#ffffff; --surface-2:#f5f7fc; --ink:#111827; --ink-2:#4a5468; --ink-3:#7d879b; --line:#e3e7f1; --head:#122a63;
+  --tint:rgba(0,167,191,.09); --shadow:0 10px 30px rgba(15,23,55,.08);
+  --serif:'Playfair Display',Georgia,serif; --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif; --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#070d1f;--surface:#0f1a35;--surface-2:#132140;--ink:#e7ecf6;--ink-2:#b3bdd2;--ink-3:#8390aa;--line:#23335a;--head:#dfe7fb;--accent-ink:#35c9dd;--gold-ink:#e2c35c;--tint:rgba(53,201,221,.1);--shadow:0 10px 30px rgba(0,0,0,.35)}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#070d1f;--surface:#0f1a35;--surface-2:#132140;--ink:#e7ecf6;--ink-2:#b3bdd2;--ink-3:#8390aa;--line:#23335a;--head:#dfe7fb;--accent-ink:#35c9dd;--gold-ink:#e2c35c;--tint:rgba(53,201,221,.1);--shadow:0 10px 30px rgba(0,0,0,.35)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6}
+h1,h2,h3{text-wrap:balance}
+a{color:var(--accent-ink)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1160px;margin:0 auto;padding-inline:20px}
+.bar-top{background:var(--navy);color:#fff}
+.bar-top .wrap{display:flex;justify-content:space-between;align-items:center;height:56px;gap:12px}
+.bar-top a{color:#fff;text-decoration:none;font-weight:600;font-size:.88rem}
+.bar-top a:hover{color:#7fe3ef}
+.hero{background:linear-gradient(135deg,var(--navy),var(--navy-3) 65%,#0e2f78);color:#fff;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 88% 15%,rgba(0,188,212,.25),transparent 45%),radial-gradient(circle at 5% 95%,rgba(201,162,39,.2),transparent 40%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;padding-block:48px 40px}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:#9fe9f3}
+.hero h1{font-family:var(--serif);font-weight:800;font-size:clamp(2.3rem,6vw,4.2rem);line-height:1.05;margin:8px 0 10px}
+.hero h1 span{background:linear-gradient(90deg,#7fe3ef,#f4e4b0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin:0;color:rgba(255,255,255,.85);max-width:62ch}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:30px}
+@media (max-width:820px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:16px}
+.kpi b{display:block;font-family:var(--serif);font-size:2.3rem;line-height:1;font-variant-numeric:tabular-nums}
+.kpi span{font-size:.8rem;color:rgba(255,255,255,.75)}
+section{padding-block:44px 8px}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+.sec-h h2{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.1rem);color:var(--head);margin:0}
+.sec-h p{margin:0;color:var(--ink-3);font-size:.92rem}
+.card{background:var(--surface);border-radius:16px;box-shadow:var(--shadow);padding:24px}
+.card h3{margin:0 0 14px;font-size:1.02rem;color:var(--head)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:860px){.grid2,.grid3{grid-template-columns:minmax(0,1fr)}}
+
+/* career */
+.countries{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:20px}
+@media (max-width:760px){.countries{grid-template-columns:minmax(0,1fr)}}
+.country{all:unset;box-sizing:border-box;cursor:pointer;background:var(--surface);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;border-top:5px solid var(--c)}
+.country[aria-pressed="true"]{outline:2px solid var(--c)}
+.country b{font-family:var(--serif);font-size:1.4rem;color:var(--head);display:block}
+.country small{color:var(--ink-3);font-size:.82rem}
+.country ul{margin:8px 0 0;padding-left:18px;font-size:.88rem;color:var(--ink-2)}
+.tl{position:relative;display:flex;flex-direction:column;gap:14px;padding-left:0}
+.tl::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--line);transform:translateX(-1px)}
+.ti{width:calc(50% - 26px);background:var(--surface);border-radius:12px;box-shadow:var(--shadow);padding:14px 18px;position:relative;transition:opacity .25s}
+.ti:nth-child(odd){align-self:flex-start}
+.ti:nth-child(even){align-self:flex-end}
+.ti::after{content:"";position:absolute;top:18px;width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--c)}
+.ti:nth-child(odd)::after{right:-34px}
+.ti:nth-child(even)::after{left:-34px}
+.ti .yr{font-family:var(--mono);font-size:.78rem;color:var(--c-ink,var(--ink-3));font-weight:500}
+.ti h4{margin:2px 0;font-size:1rem;color:var(--head)}
+.ti p{margin:0;font-size:.86rem;color:var(--ink-2)}
+.ti.dim{opacity:.28}
+@media (max-width:760px){.tl::before{left:8px}.ti{width:auto;margin-left:30px;align-self:stretch!important}.ti::after{left:-30px!important;right:auto!important}}
+
+/* charts */
+.hbar{display:grid;grid-template-columns:150px minmax(0,1fr) 34px;gap:10px;align-items:center;margin:9px 0;font-size:.88rem}
+.hbar span{color:var(--ink-2)}
+.hbar .track{height:12px;background:var(--line);border-radius:6px;overflow:hidden}
+.hbar .fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:6px}
+.hbar em{font-style:normal;font-family:var(--mono);font-size:.82rem;color:var(--head);text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:480px){.hbar{grid-template-columns:110px minmax(0,1fr) 30px;font-size:.8rem}}
+svg text{font-family:var(--sans)}
+.ax{fill:var(--ink-3);font-size:11px}
+.gl{stroke:var(--line)}
+.area{fill:url(#ag)}
+.ln{fill:none;stroke:var(--accent);stroke-width:2.5}
+.pt{fill:var(--surface);stroke:var(--accent);stroke-width:2}
+.pl{fill:var(--head);font-size:11px;font-weight:600}
+.donut-wrap{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.legend{display:flex;flex-direction:column;gap:8px;font-size:.9rem}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:8px;vertical-align:-1px}
+.legend b{font-family:var(--mono);margin-left:6px;color:var(--head)}
+.big{font-family:var(--serif);font-size:2.6rem;line-height:1;color:var(--accent-ink);font-variant-numeric:tabular-nums}
+.stat-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+.stat-row div{background:var(--surface-2);border-radius:10px;padding:12px}
+.stat-row b{display:block;font-family:var(--serif);font-size:1.6rem;color:var(--head);line-height:1.1}
+.stat-row span{font-size:.76rem;color:var(--ink-3)}
+
+/* gantt */
+.gantt-wrap{overflow-x:auto}
+.gantt{min-width:640px}
+.g-row{display:grid;grid-template-columns:220px minmax(0,1fr);gap:12px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line)}
+.g-row:last-child{border-bottom:none}
+.g-name{font-size:.84rem;color:var(--ink)}
+.g-name small{display:block;color:var(--ink-3);font-size:.74rem}
+.g-track{position:relative;height:18px}
+.g-bar{position:absolute;top:2px;height:14px;border-radius:7px;background:var(--c)}
+.g-bar.ongoing{background:linear-gradient(90deg,var(--c) 70%,transparent)}
+.g-axis{display:grid;grid-template-columns:220px minmax(0,1fr);gap:12px;margin-top:6px}
+.g-ticks{position:relative;height:16px;font-family:var(--mono);font-size:.7rem;color:var(--ink-3)}
+.g-ticks span{position:absolute;transform:translateX(-50%)}
+.g-key{display:flex;flex-wrap:wrap;gap:14px;font-size:.8rem;color:var(--ink-3);margin-bottom:12px}
+.g-key i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+/* recognition */
+.rec{display:flex;gap:14px;align-items:flex-start}
+.rec .badge{flex-shrink:0;width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-family:var(--serif);font-weight:800;color:#fff;background:linear-gradient(135deg,var(--navy-3),var(--accent))}
+.rec .badge.g{background:linear-gradient(135deg,#8a6d0e,var(--gold))}
+.rec h4{margin:0 0 2px;color:var(--head);font-size:.98rem}
+.rec p{margin:0;font-size:.86rem;color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--tint);color:var(--head);border:1px solid var(--line);padding:5px 12px;border-radius:20px;font-size:.82rem}
+footer{margin-top:50px;background:var(--navy);color:rgba(255,255,255,.85);text-align:center;padding-block:34px}
+footer h2{font-family:var(--serif);color:#fff;margin:0 0 12px}
+footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+footer nav a{color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:8px 14px;font-weight:600;font-size:.86rem}
+footer nav a:hover{background:var(--accent);border-color:var(--accent)}
+footer small{display:block;margin-top:16px;opacity:.6}
+</style>
+
+<div class="bar-top"><div class="wrap"><a href="index.html">← Back to full website</a><a href="#connect">Connect</a></div></div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Infographic CV · 2026</div>
+    <h1>Moutaz Alazab, <span>PhD</span></h1>
+    <p>Associate Professor in Cybersecurity at Liverpool John Moores University (Oryx University), Doha. Fifteen years across Jordan, Australia and Qatar, detecting and preventing cybercrime with AI.</p>
+    <div class="kpis">
+      <div class="kpi"><b>100+</b><span>peer-reviewed publications</span></div>
+      <div class="kpi"><b>3,700+</b><span>citations</span></div>
+      <div class="kpi"><b>28</b><span>h-index</span></div>
+      <div class="kpi"><b>US$1M+</b><span>research grants</span></div>
+      <div class="kpi"><b>Top 2%</b><span>Stanford/Elsevier, 2023–25</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section id="career">
+    <div class="sec-h"><h2>Career trajectory</h2><p>Select a country to highlight its roles.</p></div>
+    <div class="countries">
+      <button class="country" type="button" data-country="JO" style="--c:var(--gold)" aria-pressed="false"><b>Jordan</b><small>2009 – 2023 · industry and academia</small><ul><li>JEPCO, network security engineer</li><li>Al-Isra University</li><li>Al-Balqa Applied University, Associate Dean and Head of Department</li></ul></button>
+      <button class="country" type="button" data-country="AU" style="--c:var(--accent)" aria-pressed="false"><b>Australia</b><small>2011 – present · PhD, teaching, consulting</small><ul><li>Deakin University, PhD and researcher</li><li>MIT and CQUniversity, Melbourne</li><li>CyberSecConSol, Director</li></ul></button>
+      <button class="country" type="button" data-country="QA" style="--c:var(--maroon)" aria-pressed="false"><b>Qatar</b><small>2017 – present · programme building</small><ul><li>Community College of Qatar</li><li>LJMU · Oryx University</li><li>Expert Witness, Ministry of Justice</li></ul></button>
+    </div>
+    <div class="tl" id="tl">
+      <div class="ti" data-country="QA" style="--c:var(--maroon)"><div class="yr">Sep 2023 – present</div><h4>Associate Professor in Cybersecurity</h4><p>Liverpool John Moores University · Oryx University, Doha. BSc and MSc Cyber Security, Research Excellence Centre advisor.</p></div>
+      <div class="ti" data-country="JO" style="--c:var(--gold)"><div class="yr">Sep 2019 – Sep 2023</div><h4>Associate Professor · Associate Dean · Head of Department</h4><p>Al-Balqa Applied University. Co-developed Jordan's first BSc in Digital Forensics.</p></div>
+      <div class="ti" data-country="QA" style="--c:var(--maroon)"><div class="yr">Aug 2017 – Aug 2019</div><h4>Assistant Professor / Lecturer</h4><p>Community College of Qatar. Helped establish the college's first Cyber Security department.</p></div>
+      <div class="ti" data-country="AU" style="--c:var(--accent)"><div class="yr">Oct 2015 – Jul 2017</div><h4>Lecturer</h4><p>Melbourne Institute of Technology · CQUniversity. Supervised 7 Master's theses.</p></div>
+      <div class="ti" data-country="JO" style="--c:var(--gold)"><div class="yr">Sep 2014 – Sep 2015</div><h4>Assistant Professor</h4><p>Al-Isra University, Amman. Research in cybercrime and digital forensics.</p></div>
+      <div class="ti" data-country="AU" style="--c:var(--accent)"><div class="yr">Apr 2011 – Aug 2014</div><h4>PhD in IT · Researcher and Lecturer</h4><p>Deakin University. Smartphone malware detection with machine learning.</p></div>
+      <div class="ti" data-country="AU" style="--c:var(--accent)"><div class="yr">May – Sep 2011</div><h4>Network Security Engineer</h4><p>Federation University Australia.</p></div>
+      <div class="ti" data-country="JO" style="--c:var(--gold)"><div class="yr">Mar 2010 – Apr 2011</div><h4>Network Security Engineer</h4><p>Jordanian Electric Power Company (JEPCO). NIST-aligned security plans, forensics.</p></div>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="sec-h"><h2>Research footprint</h2><p>Based on the 74 publications listed on the website.</p></div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Where the work concentrates</h3>
+        <div id="topics"></div>
+      </div>
+      <div class="card">
+        <h3>Output by year</h3>
+        <svg id="yearArea" viewBox="0 0 520 230" role="img" aria-label="Publications per year, 2011 to 2026"></svg>
+        <div class="stat-row">
+          <div><b>55</b><span>papers since 2022</span></div>
+          <div><b>21</b><span>as first author</span></div>
+          <div><b>147</b><span>co-authors</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="grid3" style="margin-top:20px">
+      <div class="card">
+        <h3>Publication types</h3>
+        <div class="donut-wrap">
+          <svg id="donut" width="140" height="140" viewBox="0 0 140 140" role="img" aria-label="57 journal articles, 15 conference papers, 2 book chapters"></svg>
+          <div class="legend"><span><i style="background:var(--accent)"></i>Journals<b>57</b></span><span><i style="background:var(--gold)"></i>Conferences<b>15</b></span><span><i style="background:var(--maroon)"></i>Chapters<b>2</b></span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Frequent venues</h3>
+        <div class="chips"><span class="chip">Electronics ×7</span><span class="chip">Information ×4</span><span class="chip">Egyptian Informatics Journal ×3</span><span class="chip">IEEE Access</span><span class="chip">Expert Systems with Applications</span><span class="chip">Expert Systems</span><span class="chip">Cluster Computing</span><span class="chip">Discover IoT</span><span class="chip">IEEE Trans. Industrial Informatics</span><span class="chip">Future Generation Computer Systems</span></div>
+      </div>
+      <div class="card">
+        <h3>Editorial reach</h3>
+        <div class="big">8</div><p style="margin:4px 0 12px;color:var(--ink-2);font-size:.9rem">editorial boards, including Handling Editor at Alexandria Engineering Journal</p>
+        <div class="big">3</div><p style="margin:4px 0 0;color:var(--ink-2);font-size:.9rem">guest-edited special issues with Springer Nature and MDPI</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="grants">
+    <div class="sec-h"><h2>Funded research</h2><p>Grants and funded projects, 2011 to present.</p></div>
+    <div class="card">
+      <div class="g-key"><span><i style="background:var(--accent)"></i>Lead</span><span><i style="background:var(--gold)"></i>Researcher / contributor</span><span>Fading bar = ongoing</span></div>
+      <div class="gantt-wrap"><div class="gantt" id="gantt"></div></div>
+    </div>
+  </section>
+
+  <section id="leadership">
+    <div class="sec-h"><h2>Leadership &amp; teaching</h2></div>
+    <div class="grid3">
+      <div class="card"><div class="big">4</div><h3 style="margin-top:6px">Programmes and departments built</h3><p style="margin:0;font-size:.9rem;color:var(--ink-2)">BSc Digital Forensics (Al-Balqa), Cyber Security department (CCQ), BSc and MSc Cyber Security (Oryx · LJMU).</p></div>
+      <div class="card"><div class="big">7</div><h3 style="margin-top:6px">Institutions taught at</h3><p style="margin:0;font-size:.9rem;color:var(--ink-2)">Deakin, MIT, CQUniversity, Al-Isra, Al-Balqa, CCQ and LJMU · Oryx, in person and online.</p></div>
+      <div class="card"><div class="big">3</div><h3 style="margin-top:6px">Senior academic roles</h3><p style="margin:0;font-size:.9rem;color:var(--ink-2)">Associate Dean for Quality Assurance, Associate Dean for Student Affairs, Head of Intelligent Systems.</p></div>
+    </div>
+    <div class="card" style="margin-top:20px">
+      <h3>Subjects taught</h3>
+      <div class="chips"><span class="chip">Computer Security</span><span class="chip">Network Security</span><span class="chip">Digital &amp; Computer Forensics</span><span class="chip">Malware Analysis</span><span class="chip">Ethical Hacking &amp; Penetration Testing</span><span class="chip">Secure Software Development</span><span class="chip">IT Security Management</span><span class="chip">Risk Management</span><span class="chip">VPNs</span><span class="chip">Wireless Security</span><span class="chip">Network Security Architecture</span><span class="chip">Security Monitoring</span><span class="chip">Research Methods</span><span class="chip">Programming (Python, Java)</span><span class="chip">Compilers</span></div>
+    </div>
+  </section>
+
+  <section id="recognition">
+    <div class="sec-h"><h2>Recognition</h2></div>
+    <div class="grid2">
+      <div class="card rec"><div class="badge g">2%</div><div><h4>World's Top 2% Scientists</h4><p>Stanford University and Elsevier, 2023, 2024 and 2025.</p></div></div>
+      <div class="card rec"><div class="badge">MoJ</div><div><h4>Certified Cybersecurity Expert Witness</h4><p>Ministry of Justice, State of Qatar · Reg. No. 346.</p></div></div>
+      <div class="card rec"><div class="badge">Bb</div><div><h4>Blackboard Exemplary Course Award</h4><p>Community College of Qatar, 2019.</p></div></div>
+      <div class="card rec"><div class="badge g">D</div><div><h4>Deakin Postgraduate Research Scholarship</h4><p>Plus a AUD 20,000 research award and Microsoft Research and RNSA awards, 2011–2014.</p></div></div>
+    </div>
+  </section>
+</main>
+
+<footer id="connect">
+  <div class="wrap">
+    <h2>Connect with Moutaz Alazab</h2>
+    <nav>
+      <a href="index.html">Full website</a>
+      <a href="https://scholar.google.com/citations?user=5Cj5xnQAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+      <a href="https://orcid.org/0000-0003-2823-4776" target="_blank" rel="noopener">ORCID</a>
+      <a href="https://www.scopus.com/authid/detail.uri?authorId=55361166900" target="_blank" rel="noopener">Scopus</a>
+    </nav>
+    <small>m.alazab@bau.edu.jo · Doha, Qatar · © 2026</small>
+  </div>
+</footer>
+
+<script>
+// topics (counts computed from the website's publication list)
+const T=[["Malware & Ransomware",21],["Intrusion Detection",13],["Metaheuristics",12],["IoT & Cyber-Physical",9],["Threat Intel & LLMs",7],["Forensics & Crypto",7],["Federated Learning",4],["Blockchain",4]];
+document.getElementById('topics').innerHTML=T.map(([n,v])=>'<div class="hbar"><span>'+n+'</span><div class="track"><div class="fill" style="width:'+(v/21*100)+'%"></div></div><em>'+v+'</em></div>').join('');
+
+// area chart per year
+(function(){
+  const Y={2011:4,2012:4,2013:2,2014:0,2015:2,2016:0,2017:0,2018:1,2019:1,2020:4,2021:1,2022:12,2023:8,2024:13,2025:15,2026:7};
+  const ys=Object.keys(Y).map(Number), W=520,H=230,l=30,r=12,t=20,b=28,max=15;
+  const x=i=>l+i*(W-l-r)/(ys.length-1), y=v=>t+(H-t-b)*(1-v/max);
+  let g='<defs><linearGradient id="ag" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#00a7bf" stop-opacity=".35"/><stop offset="1" stop-color="#00a7bf" stop-opacity="0"/></linearGradient></defs>';
+  [0,5,10,15].forEach(v=>g+='<line class="gl" x1="'+l+'" x2="'+(W-r)+'" y1="'+y(v)+'" y2="'+y(v)+'"/><text class="ax" x="'+(l-6)+'" y="'+(y(v)+4)+'" text-anchor="end">'+v+'</text>');
+  const pts=ys.map((yr,i)=>[x(i),y(Y[yr])]);
+  g+='<path class="area" d="M'+pts.map(p=>p.join(',')).join('L')+'L'+x(ys.length-1)+','+y(0)+'L'+x(0)+','+y(0)+'Z"/>';
+  g+='<path class="ln" d="M'+pts.map(p=>p.join(',')).join('L')+'"/>';
+  ys.forEach((yr,i)=>{ if(Y[yr]>=7) g+='<circle class="pt" cx="'+pts[i][0]+'" cy="'+pts[i][1]+'" r="4"/><text class="pl" x="'+pts[i][0]+'" y="'+(pts[i][1]-9)+'" text-anchor="middle">'+Y[yr]+'</text>';
+    if(i%3===0||yr===2026) g+='<text class="ax" x="'+x(i)+'" y="'+(H-8)+'" text-anchor="middle">'+yr+'</text>'; });
+  document.getElementById('yearArea').innerHTML=g;
+})();
+
+// donut
+(function(){
+  const d=[[57,'var(--accent)'],[15,'var(--gold)'],[2,'var(--maroon)']], tot=74, R=52, C=2*Math.PI*R; let off=0, g='';
+  d.forEach(([v,c])=>{ const len=v/tot*C; g+='<circle cx="70" cy="70" r="'+R+'" fill="none" stroke="'+c+'" stroke-width="20" stroke-dasharray="'+len+' '+(C-len)+'" stroke-dashoffset="'+(-off)+'" transform="rotate(-90 70 70)"/>'; off+=len; });
+  g+='<text x="70" y="68" text-anchor="middle" style="font-family:var(--serif);font-size:26px;font-weight:700;fill:var(--head)">74</text><text x="70" y="86" text-anchor="middle" style="font-size:11px;fill:var(--ink-3)">listed</text>';
+  document.getElementById('donut').innerHTML=g;
+})();
+
+// gantt
+(function(){
+  const now=2026.75, start=2011, end=2027;
+  const G=[
+    ["NAVIS neuromorphic navigation","University of Jeddah",2025.33,null,1],
+    ["Cloud seeding predictive models","University of Jeddah",2024.92,null,1],
+    ["Industry 4.0 blockchain","Al-Balqa Applied University",2023.17,2026.0,1],
+    ["ELEGANT university–enterprise","Erasmus+ (EU)",2023.42,2023.83,0],
+    ["Android ransomware detection","Al-Balqa Applied University",2021.33,2023.92,1],
+    ["IoT botnet detection (Grey Wolf)","Al-Balqa Applied University",2021.08,2022.92,1],
+    ["Assurance and secure networking","Zayed University, AED 329,200",2017.0,2018.0,1],
+    ["Protecting smartphones from malware","Stratsec (BAE Systems) · UniSA",2012.5,2012.75,0],
+    ["Securing Cyberspace Research Lab","Deakin University",2011.25,2015.0,0]
+  ];
+  const pct=v=>(v-start)/(end-start)*100;
+  let h=G.map(([n,f,a,b,lead])=>{ const e=b||now; return '<div class="g-row"><div class="g-name">'+n+'<small>'+f+'</small></div><div class="g-track"><div class="g-bar'+(b?'':' ongoing')+'" title="'+Math.floor(a)+'–'+(b?Math.floor(b):'present')+'" style="--c:'+(lead?'var(--accent)':'var(--gold)')+';left:'+pct(a)+'%;width:'+Math.max(1.2,pct(e)-pct(a))+'%"></div></div></div>'; }).join('');
+  let ticks=''; for(let y=2011;y<=2025;y+=2) ticks+='<span style="left:'+pct(y)+'%">'+y+'</span>';
+  h+='<div class="g-axis"><div></div><div class="g-ticks">'+ticks+'</div></div>';
+  document.getElementById('gantt').innerHTML=h;
+})();
+
+// country filter
+(function(){
+  const btns=[...document.querySelectorAll('.country')], items=[...document.querySelectorAll('.ti')]; let sel=null;
+  btns.forEach(b=>b.addEventListener('click',()=>{ sel = sel===b.dataset.country?null:b.dataset.country;
+    btns.forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.country===sel)));
+    items.forEach(i=>i.classList.toggle('dim', !!sel && i.dataset.country!==sel)); }));
+})();
+</script>
