@@ -26,7 +26,7 @@
     vCat: 'نوع الجهاز', vPrice: 'سعر الشراء (ريال قطري)', vAge: 'عمر الجهاز', vYears: 'سنة', vCond: 'الحالة', vBox: 'مع العلبة والملحقات الأصلية', vWar: 'ما زال ضمن الضمان',
     cats: [['phone', 'هاتف ذكي', .35], ['tablet', 'جهاز لوحي', .30], ['laptop', 'حاسوب محمول', .28], ['desktop', 'حاسوب مكتبي', .25], ['server', 'خادم أو معدات شبكات', .20], ['cctv', 'كاميرات مراقبة', .22], ['printer', 'طابعة أو ماسح', .25]],
     conds: [['sealed', 'جديد مغلق', 1], ['excellent', 'ممتاز', .9], ['good', 'جيد', .75], ['fair', 'مقبول، آثار استخدام واضحة', .55], ['faulty', 'به أعطال', .3]],
-    vOut: 'القيمة التقديرية الحالية', vRange: 'النطاق التقريبي', vDep: 'نسبة الانخفاض', vChart: 'انخفاض القيمة مع الزمن', vQar: 'ر.ق', vNote: 'تقدير إرشادي مبني على معدلات إهلاك نموذجية. التقييم الرسمي للمحكمة يعتمد على المعاينة وأسعار السوق الفعلية والمواصفات والأعطال.', vNow: 'الآن'
+    vOut: 'تقدير إرشادي فقط (ليس تقييماً)', vRange: 'النطاق التقريبي', vDep: 'نسبة الانخفاض', vChart: 'انخفاض القيمة مع الزمن', vQar: 'ر.ق', vNote: 'تنبيه مهم: هذه أداة حسابية آلية تعطي تقديراً إرشادياً عاماً بناءً على معدلات إهلاك نموذجية فقط. وهي ليست تقييماً ولا رأياً فنياً ولا تقريراً صادراً عن د. معتز العزب، ولا يعتمد عليها في أعمال الخبرة الفنية، ولا يجوز الاعتماد عليها أو الاستناد إليها أو تقديمها كدليل في أي نزاع أو إجراء قضائي. يتطلب التقييم الرسمي معاينة الجهاز فعلياً والاستناد إلى أسعار السوق الفعلية.', vNow: 'الآن'
   } : {
     waQ: [
       ['phone', 'Do you have the original phone that holds the chat?', 25, 1],
@@ -50,7 +50,7 @@
     vCat: 'Device type', vPrice: 'Purchase price (QAR)', vAge: 'Device age', vYears: 'years', vCond: 'Condition', vBox: 'With original box and accessories', vWar: 'Still under warranty',
     cats: [['phone', 'Smartphone', .35], ['tablet', 'Tablet', .30], ['laptop', 'Laptop', .28], ['desktop', 'Desktop PC', .25], ['server', 'Server or network equipment', .20], ['cctv', 'CCTV cameras', .22], ['printer', 'Printer or scanner', .25]],
     conds: [['sealed', 'New, sealed', 1], ['excellent', 'Excellent', .9], ['good', 'Good', .75], ['fair', 'Fair, clear signs of use', .55], ['faulty', 'Faulty', .3]],
-    vOut: 'Estimated current value', vRange: 'Indicative range', vDep: 'Loss of value', vChart: 'Value over time', vQar: 'QAR', vNote: 'An indicative estimate using typical depreciation rates. A formal valuation for court relies on inspection, actual market prices, specification and faults.', vNow: 'now'
+    vOut: 'Indicative estimate only (not a valuation)', vRange: 'Indicative range', vDep: 'Loss of value', vChart: 'Value over time', vQar: 'QAR', vNote: 'Important: this is an automated calculation that gives a general indicative figure using typical depreciation rates only. It is not a valuation, expert opinion or report by Dr. Moutaz Alazab, he does not rely on it in his expert work, and it must not be relied on, cited or presented as evidence in any dispute or legal proceeding. A formal valuation requires physical inspection of the device and actual market evidence.', vNow: 'now'
   };
 
   /* ---------- WhatsApp evidence strength ---------- */
@@ -151,9 +151,9 @@
       var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" class="ew-vchart" role="img" aria-label="' + L.vChart + '" dir="ltr"><defs><linearGradient id="ewvg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#00a7bf" stop-opacity=".35"/><stop offset="1" stop-color="#00a7bf" stop-opacity="0"/></linearGradient></defs>' +
         '<line x1="' + pl + '" x2="' + (W - pr) + '" y1="' + Y(0) + '" y2="' + Y(0) + '" class="gl"/><path d="' + area + '" fill="url(#ewvg)"/><path d="' + path + '" fill="none" stroke="#00a7bf" stroke-width="2.5"/>' +
         '<circle cx="' + X(age) + '" cy="' + Y(val) + '" r="5.5" fill="#c9a227" stroke="#fff" stroke-width="2"/>' + ticks + '</svg>';
-      $('ew-vout').innerHTML = '<h3>' + L.vOut + '</h3><div class="ew-big"><b>' + fmt(val) + '</b> <span>' + L.vQar + '</span></div>' +
+      $('ew-vout').innerHTML = '<div class="ew-warn" role="note">⚠ ' + L.vNote + '</div><h3>' + L.vOut + '</h3><div class="ew-big"><b>' + fmt(val) + '</b> <span>' + L.vQar + '</span></div>' +
         '<div class="ew-kv"><b>' + L.vRange + '</b><span><bdi dir="ltr">' + fmt(val * .85) + ' – ' + fmt(val * 1.15) + '</bdi> ' + L.vQar + '</span><b>' + L.vDep + '</b><span><bdi dir="ltr">' + (price ? Math.round((1 - val / price) * 100) : 0) + '%</bdi></span></div>' +
-        '<p class="ew-empty" style="margin:4px 0">' + L.vChart + ' (' + L.vYears + ')</p>' + svg + '<p class="ew-empty">' + L.vNote + '</p>';
+        '<p class="ew-empty" style="margin:4px 0">' + L.vChart + ' (' + L.vYears + ')</p>' + svg;
     }
     ['ew-vcat', 'ew-vprice', 'ew-vage', 'ew-vcond', 'ew-vbox', 'ew-vwar'].forEach(function (id) { $(id).addEventListener('input', calc); $(id).addEventListener('change', calc); });
     calc();

@@ -31,7 +31,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-of
 .top{background:linear-gradient(120deg,var(--navy),var(--navy-2));position:sticky;top:env(safe-area-inset-top,0px);z-index:10}
 .top .wrap{display:flex;justify-content:space-between;align-items:center;min-height:60px;gap:12px;flex-wrap:wrap;padding-block:8px}
 .brand{color:#fff;text-decoration:none;font-family:var(--serif);font-weight:700;font-size:1.05rem}
-.top nav{display:flex;flex-wrap:wrap;gap:4px}
+.top nav{display:flex;flex-wrap:wrap;gap:4px;margin-inline-start:auto}
 .top nav a{color:rgba(255,255,255,.86);text-decoration:none;font-weight:600;font-size:.86rem;padding:6px 10px;border-radius:7px}
 .top nav a:hover,.top nav a[aria-current]{background:rgba(255,255,255,.13);color:#fff}
 .hero{background:linear-gradient(135deg,var(--navy),var(--navy-3) 65%,#0e2f78);color:#fff;position:relative;overflow:hidden}
@@ -95,8 +95,16 @@ footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margi
 footer a{color:#fff;text-decoration:none}
 footer a:hover{color:#7fe3ef}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.lang-switch{display:inline-flex;align-items:center;direction:ltr;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:3px;background:rgba(255,255,255,.08);flex-shrink:0}
+.lang-switch a,.lang-switch span{display:inline-block;padding:5px 13px;border-radius:999px;font-weight:700;font-size:.82rem;line-height:1.3;color:#fff;text-decoration:none;white-space:nowrap}
+.lang-switch a:hover{background:rgba(255,255,255,.16)}
+.lang-switch span.on{background:#fff;color:#0b1531}
+.lang-switch a:focus-visible{outline:2px solid #7fe3ef;outline-offset:2px}
+.lang-cta{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:9px 16px;border-radius:10px;border:1.5px solid #c9a227;background:rgba(201,162,39,.16);color:#f4e4b0 !important;text-decoration:none;font-weight:700;font-size:.95rem}
+.lang-cta:hover{background:rgba(201,162,39,.3)}
 </style>
-<div class="top"><div class="wrap"><a class="brand" href="index.html">Dr. Moutaz Alazab</a><nav aria-label="Site"><a href="index.html">Home</a><a href="expert-witness.html">Expert Witness</a><a href="insights.html">Insights</a><a href="infographic-cv.html">Infographic CV</a><a href="ar.html" lang="ar">عربي</a></nav></div></div><header class="hero"><div class="wrap"><div class="crumbs"><a href="index.html">Home</a> › <a href="insights.html">Insights</a></div>
+<div class="top"><div class="wrap"><a class="brand" href="index.html">Dr. Moutaz Alazab</a><nav aria-label="Site"><a href="index.html">Home</a><a href="expert-witness.html">Expert Witness</a><a href="insights.html">Insights</a><a href="infographic-cv.html">Infographic CV</a></nav><div class="lang-switch" role="group" aria-label="Language / اللغة"><span class="on" aria-current="true">English</span><a href="ar.html" hreflang="ar" lang="ar">العربية</a></div></div></div><header class="hero"><div class="wrap"><div class="crumbs"><a href="index.html">Home</a> › <a href="insights.html">Insights</a></div>
 <div class="eyebrow">Research explained</div><h1>How AI can catch Android ransomware before it locks your phone</h1><p>Ransomware no longer targets only office networks. On Android phones it can lock the screen, encrypt photos and documents, and demand payment within minutes of installation. Here is how machine learning can spot it before it does damage.</p><div class="meta">By Dr. Moutaz Alazab · 24 September 2026 · 5 min read</div></div></header>
 <main class="wrap"><article class="panel">
 <h2>Why phones are an attractive target</h2>

@@ -198,7 +198,7 @@ footer small{opacity:.6}
 .icon-btn:hover{background:rgba(255,255,255,.18)}
 .icon-btn kbd{font-family:var(--mono);font-size:.7rem;border:1px solid rgba(255,255,255,.3);border-radius:4px;padding:0 5px;color:rgba(255,255,255,.8)}
 @media (max-width:1100px){.top-tools{margin-left:auto}}
-@media (max-width:760px){.icon-btn .lbl,.icon-btn kbd{display:none}}
+@media (max-width:760px){.icon-btn .lbl,.icon-btn kbd{display:none}.lang-switch a,.lang-switch span{padding:4px 9px;font-size:.76rem}}
 #net{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.55}
 .term{margin-top:14px;font-family:var(--mono);font-size:.88rem;color:#9fe9f3;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:7px 12px;display:inline-flex;gap:8px;max-width:100%}
 .term .p{color:#f4e4b0}
@@ -371,6 +371,18 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy);color:#fff;padding:9px 16px;border-radius:9px;font-size:.86rem;box-shadow:0 10px 30px rgba(0,0,0,.3);z-index:300}
 .reveal{transition:transform .5s ease}
 .reveal.pre{transform:translateY(10px)}
+
+.lang-switch{display:inline-flex;align-items:center;direction:ltr;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:3px;background:rgba(255,255,255,.08);flex-shrink:0}
+.lang-switch a,.lang-switch span{display:inline-block;padding:5px 13px;border-radius:999px;font-weight:700;font-size:.82rem;line-height:1.3;color:#fff;text-decoration:none;white-space:nowrap}
+.lang-switch a:hover{background:rgba(255,255,255,.16)}
+.lang-switch span.on{background:#fff;color:#0b1531}
+.lang-switch a:focus-visible{outline:2px solid #7fe3ef;outline-offset:2px}
+.lang-cta{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:9px 16px;border-radius:10px;border:1.5px solid #c9a227;background:rgba(201,162,39,.16);color:#f4e4b0 !important;text-decoration:none;font-weight:700;font-size:.95rem}
+.lang-cta:hover{background:rgba(201,162,39,.3)}
+@media (max-width:600px){.top-tools a.icon-btn,#openPalette,#themeBtn{display:none}.brand .mono-badge{width:34px;height:34px}.brand b{font-size:.92rem}.topbar .wrap{gap:8px}}
+.refs li>div{min-width:0;overflow-wrap:anywhere}
+@media (max-width:600px){.refs .find,.refs .topic,.refs .kind{white-space:normal;display:inline-block;margin-inline-start:0;margin-inline-end:6px}}
+@media (max-width:440px){.brand>span:not(.mono-badge){display:none}}
 </style>
 
 <header class="topbar">
@@ -387,8 +399,8 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
       <a href="#lab">Lab</a>
     </nav>
     <div class="top-tools">
-      <a class="icon-btn" href="infographic-cv.html" style="text-decoration:none">▦ <span class="lbl">Infographic CV</span></a>
-      <a class="icon-btn" href="ar.html" lang="ar" style="text-decoration:none" title="النسخة العربية">عربي</a>
+      <a class="icon-btn" href="infographic-cv.html" style="text-decoration:none" title="Infographic CV" aria-label="Infographic CV">▦ <span class="lbl ic-lbl">CV</span></a>
+      <div class="lang-switch" role="group" aria-label="Language / اللغة"><span class="on" aria-current="true">English</span><a href="ar.html" hreflang="ar" lang="ar">العربية</a></div>
       <button class="icon-btn" id="openPalette" type="button" aria-label="Search the site (Ctrl K)" title="Search (Ctrl K)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
       <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch colour theme">◐</button>
     </div>
@@ -658,7 +670,6 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
           <p style="margin:0 0 8px"><span class="chip" style="background:rgba(138,21,56,.1);border-color:rgba(138,21,56,.35)">Aligned with Qatar's NCSA national framework and Cyber Security Strategy 2024–2030</span></p>
           <ul class="list">
             <li>Director of CyberSecConSol, Melbourne, delivering cybersecurity training and consulting in Australia, Qatar and Jordan</li>
-            <li>Instructor on the Cyber Professional: Department Managers Program for Teknowledge's Digital Center of Excellence, in collaboration with Qatar's National Cyber Security Agency (2026)</li>
             <li>AI and cybersecurity training for administrators, faculty and staff at LJMU · Oryx University</li>
             <li>Advisor on the planned Cybersecurity and AI Research Excellence Centre: research focus, infrastructure and funding strategy</li>
           </ul>

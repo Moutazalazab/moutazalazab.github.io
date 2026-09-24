@@ -165,3 +165,5 @@ details.ew-law p b{color:var(--ink)}
 .panel .ew-ncsa-card p,.panel .ew-ncsa-card li{color:rgba(255,255,255,.9)}
 .panel .ew-ncsa-card b{color:#fff}
 .ew-laws{align-items:start}
+
+.ew-warn{border:1px solid rgba(192,57,43,.45);background:rgba(192,57,43,.07);color:var(--ink);border-radius:10px;padding:10px 12px;font-size:.85rem;line-height:1.55;margin-bottom:12px;font-weight:500}
