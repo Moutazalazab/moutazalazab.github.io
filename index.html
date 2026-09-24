@@ -329,7 +329,7 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
 
 <header class="topbar">
   <div class="wrap" style="position:relative">
-    <a class="brand" href="#top"><span class="mono-badge" aria-hidden="true" style="position:relative;overflow:hidden">MA<img src="photo.jpg" alt="" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%"></span><span><b>Dr. Moutaz Alazab</b><small>Cybersecurity &amp; AI</small></span></a>
+    <a class="brand" href="#top"><span class="mono-badge" aria-hidden="true" style="position:relative;overflow:hidden">MA<img src="photo.jpg" alt="" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%"></span><span><b>Dr. Moutaz Alazab</b><small>Cybersecurity &amp; AI</small></span></a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Sections">
       <a href="#about">About</a>
@@ -353,7 +353,7 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
   <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap">
     <!-- To use a photo: put it in images/moutaz.jpg and replace "MA" with <img src="images/moutaz.jpg" alt="Dr. Moutaz Alazab"> -->
-    <div class="portrait" style="position:relative">MA<img src="photo.jpg" alt="Dr. Moutaz Alazab" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%"></div>
+    <div class="portrait" style="position:relative">MA<img src="photo.jpg" alt="Dr. Moutaz Alazab" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%"></div>
     <div class="hero-info">
       <h1>Associate Professor Moutaz Alazab</h1>
       <p class="role">Associate Professor in Cybersecurity · PhD (Deakin)</p>
@@ -375,8 +375,8 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
     </div>
     <div class="hero-figs" aria-label="Research impact">
       <div class="fig"><b data-count="100" data-suffix="+">100+</b><span>peer-reviewed publications</span></div>
-      <div class="fig"><b data-count="3700" data-suffix="+">3,700+</b><span>citations</span></div>
-      <div class="fig"><b data-count="28">28</b><span>h-index · Sep 2026</span></div>
+      <div class="fig"><b data-count="3700" data-suffix="+" data-stat="citations" data-plus>3,700+</b><span>citations · Google Scholar</span></div>
+      <div class="fig"><b data-count="28" data-stat="hIndex">28</b><span>h-index · <span data-stat="updated">Sep 2026</span></span></div>
       <div class="fig"><b data-count="1" data-prefix="US$" data-suffix="M+">US$1M+</b><span>research grants</span></div>
     </div>
   </div>
@@ -549,6 +549,7 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
           <button type="button" data-kind="J" aria-pressed="false">Journals</button>
           <button type="button" data-kind="C" aria-pressed="false">Conferences</button>
           <button type="button" data-kind="B" aria-pressed="false">Chapters</button>
+          <button type="button" data-kind="P" aria-pressed="false">Preprints</button>
         </div>
       </div>
       <div class="active-filters" id="activeFilters"></div>
@@ -604,7 +605,7 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
           <h3>Expert witness</h3>
           <p class="lede" style="font-size:.95rem">Certified Cybersecurity Expert Witness registered with the Ministry of Justice, State of Qatar <span class="mono">(Reg. No. 346)</span>. I provide independent technical analysis and expert opinion in matters involving digital evidence, cybercrime, malware and network intrusions.</p>
           <div class="chips"><span class="chip">Digital evidence analysis</span><span class="chip">Malware attribution</span><span class="chip">Incident reconstruction</span><span class="chip">Chain of custody</span></div>
-          <p style="margin-top:14px"><a href="expert-witness.html"><b>Expert witness services, areas of expertise and FAQ →</b></a></p>
+          <p style="margin-top:14px"><a href="expert-witness.html#ew-assess"><b>Assess your case online, with the first-24-hours checklist and evidence verifier →</b></a><br><a href="ar-expert-witness.html" lang="ar"><b>صفحة الخبرة الفنية بالعربية ←</b></a></p>
         </div>
         <div>
           <h3>CyberSecConSol · training and advisory</h3>
@@ -795,6 +796,7 @@ details.job.flash{box-shadow:0 0 0 3px var(--accent)}
 <div class="toast" id="toast" hidden></div>
 <button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
 
+<script src="stats.js"></script>
 <script>
 // kind: J journal, C conference, B book chapter
 const PUBS = [
@@ -819,6 +821,7 @@ const PUBS = [
 [2025,"J","Al Siam, A., Alazab, M., Awajan, A., Faruqui, N.","A Comprehensive Review of AI's Current Impact and Future Prospects in Cybersecurity","IEEE Access, 13: 14029–14050"],
 [2025,"J","Atoum, M. S., Alarood, A. A., Alsolmi, E. A., Obeidat, A., Alazab, M.","Predictive Analysis of Global Terrorist Attacks Using Lexical Patterns Across Multiple Datasets","Expert Systems, 42(1): e13808"],
 [2025,"J","Fazal, S., Rehman, H. U., Alazab, M.","Towards Precision Medicine in Glioblastoma: Unraveling MGMT Methylation Status Using Adaptive Sparse Autoencoders","Egyptian Informatics Journal, 29: 100583"],
+[2025,"P","Rehman, H. U., Fazal, S., Alazab, M., Baydoun, A.","Decoding MGMT Methylation: A Step Towards Precision Medicine in Glioblastoma","arXiv preprint arXiv:2508.16424"],
 [2025,"C","Al Siam, A., Shohan, S., Faruqui, N., Alazab, M.","Explainable Intrusion Detection and Prevention Framework for Next-Generation Networks","IEEE SPICSCON 2025, 105–109"],
 [2024,"J","Kaleem, S., Jalil, Z., Nasir, M., Alazab, M.","Word Embedding Empowered Topic Recognition in News Articles","PeerJ Computer Science, 10: e2300"],
 [2024,"J","Akhtar, M. A. K., Kumar, M., Verma, S., Cengiz, K., Verma, P. K., Abu Khurma, R., Alazab, M.","Unifying Optimization Forces: Harnessing the Fine-Structure Constant in an Electromagnetic-Gravity Optimization Framework","Journal of Intelligent Systems, 33(1): 20230306"],
@@ -873,7 +876,7 @@ const PUBS = [
 [2011,"C","Alazab, A., Alazab, M., Abawajy, J., Hobbs, M.","Web Application Protection against SQL Injection Attack","7th ICITA, 1–7"],
 [2011,"C","Alazab, M., Alazab, A., Batten, L.","Smartphone Malware Based on Synchronisation Vulnerabilities","7th International Conference on Information Technology and Applications (ICITA)"]
 ];
-const KIND = {J:"Journal",C:"Conference",B:"Chapter"};
+const KIND = {J:"Journal",C:"Conference",B:"Chapter",P:"Preprint"};
 const TOPICS = [
   {id:"ai", name:"Artificial Intelligence", re:/artificial intelligence|\bAI\b|machine learning|deep learning|learning|neural|intelligen|LSTM|GAN|transformer|language model|XGBoost|autoencoder|Bayes|classif|predict/i, blurb:"Machine learning, deep learning, LLMs and GenAI"},
   {id:"malware", name:"Malware & Ransomware", re:/malware|ransomware|botnet|malicious|obfuscat|data leak|data theft/i, blurb:"Mobile and IoT malware, ransomware, botnets"},
